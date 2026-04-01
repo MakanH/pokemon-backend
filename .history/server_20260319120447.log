@@ -1,0 +1,6 @@
+[]
+[32mGET[39m      \~\
+[32mGET[39m      \\~\:name\
+[33mPOST[39m     \~\
+{"level":30,"time":1773936263945,"pid":392,"hostname":"Makan","msg":"Connected to MongoDb"}
+Server running at http://localhost:1339/

@@ -1,0 +1,1 @@
+const dbName : string = "pokemon_db";
