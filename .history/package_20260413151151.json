@@ -8,7 +8,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "vitest",
-    "dev": "vite"
+    "dev": "nodemon --exec ts-node-esm src/server.ts"
   },
   "dependencies": {
     "@types/body-parser": "^1.19.6",
