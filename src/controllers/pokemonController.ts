@@ -18,30 +18,36 @@ async function readPokemon(
     const name = request.params.name as string;
 
     if (!name) {
-      response.status(400).send("Bad Request: Please provide a pokemon name.");
+      response
+        .status(400)
+        .send({ errorMessage: "Bad Request: Please provide a pokemon name." });
       return;
     }
 
     const foundPokemon = await model.getSinglePokemon(name);
-    response
-      .status(200)
-      .send(
-        `Successfully found pokemon. Name: ${foundPokemon.name}, Type: ${foundPokemon.type}`,
-      );
+    response.status(200).send(foundPokemon);
   } catch (error) {
     // Inline Error Handling
     if (error instanceof InvalidInputError) {
-      response.status(400).send(`User Error: ${error.message}`);
+      response
+        .status(400)
+        .send({ errorMessage: `User Error: ${error.message}` });
     } else if (error instanceof DatabaseError) {
       if (error.message.includes("Couldn't find")) {
-        response.status(404).send(`Not Found: ${error.message}`);
+        response
+          .status(404)
+          .send({ errorMessage: `Not Found: ${error.message}` });
       } else {
-        response.status(500).send(`System Error: ${error.message}`);
+        response
+          .status(500)
+          .send({ errorMessage: `System Error: ${error.message}` });
       }
     } else if (error instanceof Error) {
-      response.status(500).send(`System Error: ${error.message}`);
+      response
+        .status(500)
+        .send({ errorMessage: `System Error: ${error.message}` });
     } else {
-      response.status(500).send("An unknown error occurred.");
+      response.status(500).send({ errorMessage: "An unknown error occurred." });
     }
   }
 }
@@ -53,24 +59,28 @@ async function createPokemon(
   try {
     const { name, type } = request.body;
     const newPokemon = await model.addPokemon(name, type);
-    response
-      .status(201)
-      .send(
-        `Successfully added pokemon. Name: ${newPokemon.name}, Type: ${newPokemon.type}`,
-      );
+    response.status(201).send(newPokemon);
   } catch (error) {
     if (error instanceof InvalidInputError) {
-      response.status(400).send(`User Error: ${error.message}`);
+      response
+        .status(400)
+        .send({ errorMessage: `User Error: ${error.message}` });
     } else if (error instanceof DatabaseError) {
       if (error.message.includes("Couldn't find")) {
-        response.status(404).send(`Not Found: ${error.message}`);
+        response
+          .status(404)
+          .send({ errorMessage: `Not Found: ${error.message}` });
       } else {
-        response.status(500).send(`System Error: ${error.message}`);
+        response
+          .status(500)
+          .send({ errorMessage: `System Error: ${error.message}` });
       }
     } else if (error instanceof Error) {
-      response.status(500).send(`System Error: ${error.message}`);
+      response
+        .status(500)
+        .send({ errorMessage: `System Error: ${error.message}` });
     } else {
-      response.status(500).send("An unknown error occurred.");
+      response.status(500).send({ errorMessage: "An unknown error occurred." });
     }
   }
 }
