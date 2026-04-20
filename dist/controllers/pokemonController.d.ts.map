@@ -1,1 +1,1 @@
-{"version":3,"file":"pokemonController.d.ts","sourceRoot":"","sources":["../../src/controllers/pokemonController.ts"],"names":[],"mappings":"AAMA,QAAA,MAAM,MAAM,4CAAmB,CAAC;AAChC,QAAA,MAAM,SAAS,cAAc,CAAC;AAsE9B,OAAO,EAAE,MAAM,EAAE,SAAS,EAAE,CAAC"}
+{"version":3,"file":"pokemonController.d.ts","sourceRoot":"","sources":["../../src/controllers/pokemonController.ts"],"names":[],"mappings":"AAMA,QAAA,MAAM,MAAM,4CAAmB,CAAC;AAChC,QAAA,MAAM,SAAS,cAAc,CAAC;AAuH9B,OAAO,EAAE,MAAM,EAAE,SAAS,EAAE,CAAC"}

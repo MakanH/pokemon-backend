@@ -21,6 +21,7 @@ const controllers = [
     "pokemonController.js",
     "errorController.js",
 ];
+//.
 app.use(express.json());
 async function registerControllers() {
     for (const controllerName of controllers) {

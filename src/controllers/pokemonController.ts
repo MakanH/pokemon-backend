@@ -9,6 +9,7 @@ const routeRoot = "/pokemons";
 
 router.get("/:name", readPokemon);
 router.post("/", createPokemon);
+router.put("/", updatePokemon);
 
 async function readPokemon(
   request: Request,
@@ -60,6 +61,44 @@ async function createPokemon(
     const { name, type } = request.body;
     const newPokemon = await model.addPokemon(name, type);
     response.status(201).send(newPokemon);
+  } catch (error) {
+    if (error instanceof InvalidInputError) {
+      response
+        .status(400)
+        .send({ errorMessage: `User Error: ${error.message}` });
+    } else if (error instanceof DatabaseError) {
+      if (error.message.includes("Couldn't find")) {
+        response
+          .status(404)
+          .send({ errorMessage: `Not Found: ${error.message}` });
+      } else {
+        response
+          .status(500)
+          .send({ errorMessage: `System Error: ${error.message}` });
+      }
+    } else if (error instanceof Error) {
+      response
+        .status(500)
+        .send({ errorMessage: `System Error: ${error.message}` });
+    } else {
+      response.status(500).send({ errorMessage: "An unknown error occurred." });
+    }
+  }
+}
+
+async function updatePokemon(
+  request: Request,
+  response: Response,
+): Promise<void> {
+  try {
+    const { oldName, oldType, newName, newType } = request.body;
+    const updatedPokemon = await model.updatePokemon(
+      oldName,
+      oldType,
+      newName,
+      newType,
+    );
+    response.status(200).send(updatedPokemon);
   } catch (error) {
     if (error instanceof InvalidInputError) {
       response
